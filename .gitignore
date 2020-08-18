@@ -1,0 +1,7 @@
+/bin/composer
+/bin/composer-setup.php
+/bin/iron-worker.tmp
+/public.built/
+/tmp/
+/vendor/
+/.vagrant/

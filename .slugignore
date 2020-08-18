@@ -1,0 +1,6 @@
+.sluglocal
+bin/
+LICENSE
+README.md
+support/vagrant/
+Vagrantfile

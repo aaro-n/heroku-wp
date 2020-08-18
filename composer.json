@@ -1,0 +1,87 @@
+{
+    "name": "xyu/heroku-wp",
+    "description": "A template for installing and running WordPress on Heroku",
+    "homepage": "https://github.com/xyu/heroku-wp",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Xiao Yu",
+            "email": "me@xyu.io",
+            "homepage": "http://xyu.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "ext-gd": "*",
+        "php": "7.*",
+	"ext-apcu": "*",
+	"ext-intl": "*",
+	"ext-exif": "*",
+	"ext-imagick": "*",
+        "ext-redis": "*",
+        "ext-mbstring": "*",
+
+        "wordpress/wordpress": "*",
+
+        "wpackagist-plugin/secure-db-connection": "*",
+        "wpackagist-plugin/redis-cache": "*",
+        "wpackagist-plugin/oss-upload": "*",
+        "wpackagist-plugin/xml-sitemap-feed": "*",
+        "wpackagist-plugin/amp": "*",
+        "wpackagist-plugin/insert-headers-and-footers": "*",
+        "wpackagist-plugin/wp-crontrol": "*",
+
+        "wpackagist-plugin/easy-wp-smtp": "*",
+
+        "predis/predis": "~1",
+        "wp-cli/wp-cli": "^2"
+    },
+    "suggest": {
+        "wpackagist-plugin/cloudflare-cache-purge": "Purges cached pages on CF.",
+        "trepmal/wp-revisions-cli": "WP CLI tool for cleaning up revisions (dev-master)"
+    },
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "wordpress/wordpress",
+                "version": "5.4.2",
+                "dist": {
+                    "type": "zip",
+                    "url": "https://cn.wordpress.org/wordpress-5.4.2-zh_CN.zip"
+                }
+            }
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/xyu/batcache"
+        },
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        },
+        {
+            "type": "composer",
+            "url": "https://wp-cli.org/package-index"
+        }
+    ],
+    "extra": {
+        "installer-paths": {
+            "vendor/wordpress/wordpress-ext/wp-content/mu-plugins/{$name}/": [
+                "wpackagist-plugin/redis-cache",
+                "wpackagist-plugin/secure-db-connection"
+            ],
+            "vendor/wordpress/wordpress-ext/wp-content/plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ],
+            "vendor/wordpress/wordpress-ext/wp-content/themes/{$name}/": [
+                "type:wordpress-theme"
+            ]
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "./support/app_slug_compile.sh"
+        ]
+    }
+}
