@@ -1,3 +1,5 @@
+在[原仓库](https://github.com/xyu/heroku-wp)，做了一些修改，可以参考[本博客](https://www.itansuo.info/411)。
+
 Heroku WP
 =========
 
