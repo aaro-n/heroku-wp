@@ -3,7 +3,7 @@
 Plugin Name: WP Fastest Cache
 Plugin URI: http://wordpress.org/plugins/wp-fastest-cache/
 Description: The simplest and fastest WP Cache system
-Version: 0.9.0.9
+Version: 0.9.1.2
 Author: Emre Vona
 Author URI: http://tr.linkedin.com/in/emrevona
 Text Domain: wp-fastest-cache
@@ -1050,6 +1050,7 @@ GNU General Public License for more details.
 
 		public function singleDeleteCache($comment_id = false, $post_id = false){
 			include_once('inc/cdn.php');
+
 			CdnWPFC::cloudflare_clear_cache();
 
 			$to_clear_parents = true;
@@ -1932,7 +1933,7 @@ GNU General Public License for more details.
 						}
 					}
 
-					if($cdn->excludekeywords){
+					if(isset($cdn->excludekeywords) && $cdn->excludekeywords){
 						$cdn->excludekeywords = str_replace(",", "|", $cdn->excludekeywords);
 
 						if(preg_match("/".preg_quote($cdn->excludekeywords, "/")."/i", $matches[0])){

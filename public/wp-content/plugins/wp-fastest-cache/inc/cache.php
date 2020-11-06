@@ -662,6 +662,13 @@
 				}
 			}
 
+			// for iThemes Security: not to cache 403 pages
+			if(defined('DONOTCACHEPAGE') && $this->isPluginActive('better-wp-security/better-wp-security.php')){
+				if(function_exists("http_response_code") && http_response_code() == 403){
+					return $buffer."<!-- DONOTCACHEPAGE is defined as TRUE -->";
+				}
+			}
+
 			if($this->exclude_page($buffer)){
 				$buffer = preg_replace('/<\!--WPFC_PAGE_TYPE_[a-z]+-->/i', '', $buffer);	
 				return $buffer;
@@ -862,11 +869,11 @@
 						    set $path /path/$1/index.html;
 						}
 						*/
-						$pre_buffer[0][$key] = preg_replace('/\$(\d)/', '\\\$$1', $pre_buffer[0][$key]);
+						if(isset($pre_buffer[0][$key])){
+							$pre_buffer[0][$key] = preg_replace('/\$(\d)/', '\\\$$1', $pre_buffer[0][$key]);
 
-						
-
-						$content = preg_replace("/".preg_quote($value, "/")."/", $pre_buffer[0][$key], $content);
+							$content = preg_replace("/".preg_quote($value, "/")."/", $pre_buffer[0][$key], $content);
+						}
 					}
 				}
 			}
@@ -876,7 +883,7 @@
 
 		public function cdn_rewrite($content){
 			if($this->cdn){
-				$content = preg_replace_callback("/(srcset|src|href|data-vc-parallax-image|data-bg|data-fullurl|data-mobileurl|data-img-url|data-cvpsrc|data-cvpset|data-thumb|data-bg-url|data-large_image|data-lazyload|data-lazy|data-source-url|data-srcsmall|data-srclarge|data-srcfull|data-slide-img|data-lazy-original)\s{0,2}\=\s{0,2}[\'\"]([^\'\"]+)[\'\"]/i", array($this, 'cdn_replace_urls'), $content);
+				$content = preg_replace_callback("/(srcset|src|href|data-vc-parallax-image|data-bg|data-bg-webp|data-fullurl|data-mobileurl|data-img-url|data-cvpsrc|data-cvpset|data-thumb|data-bg-url|data-large_image|data-lazyload|data-lazy|data-source-url|data-srcsmall|data-srclarge|data-srcfull|data-slide-img|data-lazy-original)\s{0,2}\=\s{0,2}[\'\"]([^\'\"]+)[\'\"]/i", array($this, 'cdn_replace_urls'), $content);
 
 				//url()
 				$content = preg_replace_callback("/(url)\(([^\)\>]+)\)/i", array($this, 'cdn_replace_urls'), $content);
