@@ -89,7 +89,7 @@
       "plan": "scheduler:standard"
     },
     {
-      "plan": "papertrail:hobby-dev"
+      "plan": "papertrail:choklad"
     },
     {
       "plan": "newrelic:wayne"
