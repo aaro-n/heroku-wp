@@ -86,7 +86,7 @@
       "as": "WP_DB"
     },
     {
-      "plan": "scheduler:hobby-dev"
+      "plan": "scheduler:standard"
     },
     {
       "plan": "papertrail:hobby-dev"
