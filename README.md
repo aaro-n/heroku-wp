@@ -252,3 +252,42 @@ If your computer goes to sleep and vagrant is suspended abruptly
 Sometimes after `vagrant up` from an aborted state, the vm does not start correctly and the site is not accessible. When this happens force a re-provision of the machine with
 
     $ vagrant provision
+
+# heroku操作
+heroku logion
+composer update --ignore-platform-reqs
+git init
+heroku git:remote -a quwublog
+git add .
+git commit -am "update one"
+git push heroku master
+
+# github cli操作
+# GITHUB CLI 工具
+## 下载软件包
+wget https://github.com/cli/cli/releases/download/v2.1.0/gh_2.1.0_linux_amd64.rpm
+## 安装软件包
+rpm -ivh gh_2.1.0_linux_amd64.rpm
+## 验证登录
+gh auth login
+## 克隆到本地
+gh repo clone itq5/heroku-wp
+## 更新依赖
+composer update
+## 在目录中创建新的 Git 仓库
+git init
+## 断连远端
+git remote rm origin
+
+## 连接远端
+git remote add origin https://github.com/itq5/wp-heroku.git
+## 添加文件
+git add .
+## 提交变更信息
+git commit -m "first commit"
+## 创建分支并连接master
+git branch -M master
+## 将本地的master分支推送到origin主机
+git push -u origin master
+## 查看状态
+git status
